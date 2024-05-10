@@ -2,11 +2,16 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('directors/', views.directors_list_api_view),
-    path('directors/<int:id>/', views.director_api_view),
-    path('movies/', views.movies_list_api_view),
-    path('movies/<int:id>/', views.movie_api_view),
-    path('reviews/<int:movie_id>/', views.reviews_list_api_view),
-    path('reviews/<int:movie_id>/<int:id>/', views.review_api_view),
-    path('movies/reviews/', views.movies_reviews_api_view),
+    path('directors/', views.DirectorAPIView.as_view({'get': 'list', 'post': 'create'})),
+    path('directors/<int:id>/', views.DirectorAPIView.as_view({'get': 'retrieve',
+                                                               'put': 'update',
+                                                               'delete': 'destroy'})),
+    path('movies/', views.MovieAPIView.as_view({'get': 'list', 'post': 'create'})),
+    path('movies/<int:id>/', views.MovieAPIView.as_view({'get': 'retrieve',
+                                                         'put': 'update',
+                                                         'delete': 'destroy'})),
+    path('reviews/', views.ReviewAPIView.as_view({'get': 'list', 'post': 'create'})),
+    path('reviews/<int:id>/', views.ReviewAPIView.as_view({'get': 'retrieve',
+                                                           'put': 'update',
+                                                           'delete': 'destroy'})),
 ]

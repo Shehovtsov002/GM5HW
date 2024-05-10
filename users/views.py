@@ -42,7 +42,7 @@ def confirm_api_view(request):
     serializer.is_valid(raise_exception=True)
     code = serializer.validated_data.get('confirmation_code')
     try:
-        user = ConfirmationCode.objects.get(confirmation_code=code)
+        user = ConfirmationCode.objects.get(confirmation_code=code).user
     except ConfirmationCode.DoesNotExist:
         return Response(data={'error': 'Invalid confirmation code'}, status=status.HTTP_404_NOT_FOUND)
     user.is_active = True
